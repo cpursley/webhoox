@@ -1,8 +1,8 @@
-defmodule Receivex.Adapter.MandrillTest do
+defmodule Webhoox.Adapter.MandrillTest do
   use ExUnit.Case
   use Plug.Test
 
-  alias Receivex.Adapter
+  alias Webhoox.Adapter
 
   defp setup_webhook do
     params = "./test/fixtures/mandrill.json" |> File.read!() |> URI.encode_www_form()
@@ -22,7 +22,7 @@ defmodule Receivex.Adapter.MandrillTest do
         secret: "secret"
       )
 
-    refute_receive {:email, %Receivex.Email{}}
+    refute_receive {:email, %Webhoox.Email{}}
   end
 
   test "processes valid webhook" do
@@ -34,7 +34,7 @@ defmodule Receivex.Adapter.MandrillTest do
         secret: "secret"
       )
 
-    assert_receive {:email, %Receivex.Email{}}
+    assert_receive {:email, %Webhoox.Email{}}
   end
 
   test "returns error for valid webhook" do
@@ -46,13 +46,13 @@ defmodule Receivex.Adapter.MandrillTest do
         secret: "incorrect secret"
       )
 
-    refute_receive {:email, %Receivex.Email{}}
+    refute_receive {:email, %Webhoox.Email{}}
   end
 
   test "normalizes email" do
     [event1, _] = Jason.decode!(File.read!("./test/fixtures/mandrill.json"))
 
-    assert %Receivex.Email{
+    assert %Webhoox.Email{
              message_id:
                "<999.20130510192820.aaaaaaaaaaaaaa.aaaaaaaa@mail115.us4.mandrillapp.com>",
              event: "inbound",

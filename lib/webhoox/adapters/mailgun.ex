@@ -1,8 +1,8 @@
-defmodule Receivex.Adapter.Mailgun do
+defmodule Webhoox.Adapter.Mailgun do
   @moduledoc false
-  @behaviour Receivex.Adapter
+  @behaviour Webhoox.Adapter
 
-  import Receivex.Parser
+  import Webhoox.Parser
 
   def handle_webhook(conn, handler, opts) do
     payload = conn.body_params
@@ -82,7 +82,7 @@ defmodule Receivex.Adapter.Mailgun do
           }
         }
       ) do
-    %Receivex.Email{
+    %Webhoox.Email{
       message_id: message_id,
       event: event,
       sender: sender,
@@ -107,7 +107,7 @@ defmodule Receivex.Adapter.Mailgun do
           }
         }
       ) do
-    %Receivex.Email{
+    %Webhoox.Email{
       message_id: message_id,
       event: event,
       timestamp: parse_timestamp(timestamp),
@@ -127,7 +127,7 @@ defmodule Receivex.Adapter.Mailgun do
           "timestamp" => timestamp
         }
       ) do
-    %Receivex.Email{
+    %Webhoox.Email{
       message_id: message_id,
       sender: sender,
       to: parse_recipients(to),

@@ -3,7 +3,7 @@ defmodule ReceivexTest do
   use Plug.Test
 
   defmodule TestAdapter do
-    @behaviour Receivex.Adapter
+    @behaviour Webhoox.Adapter
 
     @impl true
     def handle_webhook(conn, handler, _opts) do
@@ -37,7 +37,7 @@ defmodule ReceivexTest do
 
     @impl true
     def normalize_params(payload) do
-      %Receivex.Email{
+      %Webhoox.Email{
         from: {nil, payload["from"]},
         subject: nil,
         to: nil,
@@ -47,7 +47,7 @@ defmodule ReceivexTest do
     end
   end
 
-  @opts Receivex.init(
+  @opts Webhoox.init(
           adapter: TestAdapter,
           adapter_opts: [],
           handler: TestProcessor
@@ -59,12 +59,12 @@ defmodule ReceivexTest do
       |> put_req_header("content-type", "application/x-www-form-urlencoded")
 
     conn = Plug.Parsers.call(conn, Plug.Parsers.init(parsers: [:urlencoded, :multipart]))
-    conn = Receivex.call(conn, @opts)
+    conn = Webhoox.call(conn, @opts)
     assert 200 == conn.status
     assert conn.halted
 
     assert_receive {:email,
-                    %Receivex.Email{
+                    %Webhoox.Email{
                       from: {nil, "test@example.com"},
                       html: nil,
                       sender: nil,
@@ -81,7 +81,7 @@ defmodule ReceivexTest do
         |> put_req_header("content-type", "application/x-www-form-urlencoded")
 
       conn = Plug.Parsers.call(conn, Plug.Parsers.init(parsers: [:urlencoded, :multipart]))
-      conn = Receivex.call(conn, @opts)
+      conn = Webhoox.call(conn, @opts)
 
       assert conn.status == 200
       assert conn.resp_body == "{\"body\":{\"hello\":\"World\"},\"code\":\"ok\"}"
@@ -94,7 +94,7 @@ defmodule ReceivexTest do
         |> put_req_header("content-type", "application/x-www-form-urlencoded")
 
       conn = Plug.Parsers.call(conn, Plug.Parsers.init(parsers: [:urlencoded, :multipart]))
-      conn = Receivex.call(conn, @opts)
+      conn = Webhoox.call(conn, @opts)
 
       assert conn.status == 403
       assert conn.resp_body == "bad signature"
@@ -109,7 +109,7 @@ defmodule ReceivexTest do
         |> put_req_header("content-type", "application/x-www-form-urlencoded")
 
       conn = Plug.Parsers.call(conn, Plug.Parsers.init(parsers: [:urlencoded, :multipart]))
-      conn = Receivex.call(conn, @opts)
+      conn = Webhoox.call(conn, @opts)
 
       assert conn.status == 400
       assert conn.resp_body == "{\"message\":\"Bad Request\"}"

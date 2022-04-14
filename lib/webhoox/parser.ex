@@ -1,4 +1,4 @@
-defmodule Receivex.Parser do
+defmodule Webhoox.Parser do
   @moduledoc false
 
   def parse_timestamp(timestamp) when is_binary(timestamp), do: timestamp

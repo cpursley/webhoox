@@ -1,7 +1,7 @@
 ExUnit.start()
 
 defmodule TestProcessor do
-  @behaviour Receivex.Handler
+  @behaviour Webhoox.Handler
 
   def process(email) do
     send(self(), {:email, email})

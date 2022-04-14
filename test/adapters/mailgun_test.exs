@@ -1,8 +1,8 @@
-defmodule Receivex.Adapter.MailgunTest do
+defmodule Webhoox.Adapter.MailgunTest do
   use ExUnit.Case
   use Plug.Test
 
-  alias Receivex.Adapter
+  alias Webhoox.Adapter
 
   @mailgun_standard_params %{
     "Content-Type" => "multipart/mixed; boundary=\"------------020601070403020003080006\"",
@@ -106,11 +106,11 @@ defmodule Receivex.Adapter.MailgunTest do
 
       {:ok, _conn} = Adapter.Mailgun.handle_webhook(conn, TestProcessor, api_key: "some key")
 
-      assert_receive {:email, %Receivex.Email{}}
+      assert_receive {:email, %Webhoox.Email{}}
     end
 
     test "normalizes email" do
-      assert %Receivex.Email{
+      assert %Webhoox.Email{
                message_id: "<517ACC75.5010709@mg.example.com>",
                sender: "bob@mg.example.com",
                to: [{"To Alice", "alice@mg.example.com"}],
@@ -130,11 +130,11 @@ defmodule Receivex.Adapter.MailgunTest do
 
       {:ok, _conn} = Adapter.Mailgun.handle_webhook(conn, TestProcessor, api_key: "some key")
 
-      assert_receive {:email, %Receivex.Email{}}
+      assert_receive {:email, %Webhoox.Email{}}
     end
 
     test "normalizes email" do
-      assert %Receivex.Email{
+      assert %Webhoox.Email{
                message_id: "<517ACC75.5010709@mg.example.com>",
                event: "delivered",
                sender: "bob@mg.example.com",
@@ -155,11 +155,11 @@ defmodule Receivex.Adapter.MailgunTest do
 
       {:ok, _conn} = Adapter.Mailgun.handle_webhook(conn, TestProcessor, api_key: "some key")
 
-      assert_receive {:email, %Receivex.Email{}}
+      assert_receive {:email, %Webhoox.Email{}}
     end
 
     test "normalizes email" do
-      assert %Receivex.Email{
+      assert %Webhoox.Email{
                message_id: "<517ACC75.5010709@mg.example.com>",
                event: "delivered",
                sender: nil,
@@ -180,6 +180,6 @@ defmodule Receivex.Adapter.MailgunTest do
     {:error, _conn} =
       Adapter.Mailgun.handle_webhook(conn, TestProcessor, api_key: "incorrect key")
 
-    refute_receive {:email, %Receivex.Email{}}
+    refute_receive {:email, %Webhoox.Email{}}
   end
 end

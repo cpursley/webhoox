@@ -1,4 +1,4 @@
-defmodule Receivex do
+defmodule Webhoox do
   @moduledoc """
   Package that makes it easy to deal with inbound webhooks.
 
@@ -6,12 +6,12 @@ defmodule Receivex do
   ## Installation
 
   If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-  by adding `receivex` to your list of dependencies in `mix.exs`:
+  by adding `webhoox` to your list of dependencies in `mix.exs`:
 
   ```elixir
   def deps do
   [
-    {:receivex, "~> 0.8.2"}
+    {:webhoox, "~> 0.1.0"}
   ]
   end
   ```
@@ -20,9 +20,9 @@ defmodule Receivex do
   Example configuration for Mandrill with the Plug router
   ```elixir
   forward("_incoming",
-    to: Receivex,
+    to: Webhoox,
     init_opts: [
-      adapter: Receivex.Adapter.Mandrill,
+      adapter: Webhoox.Adapter.Mandrill,
       adapter_opts: [
         secret: "i8PTcm8glMgsfaWf75bS1FQ",
         url: "http://example.com"
@@ -34,8 +34,8 @@ defmodule Receivex do
 
   Example configuration for Mandrill with the Phoenix router
   ```elixir
-  forward("_incoming", Receivex,
-    adapter: Receivex.Adapter.Mandrill,
+  forward("_incoming", Webhoox,
+    adapter: Webhoox.Adapter.Mandrill,
     adapter_opts: [
       secret: "i8PTcm8glMgsfaWf75bS1FQ",
       url: "http://example.com"
@@ -47,9 +47,9 @@ defmodule Receivex do
   Example configuration for Mailgun with the Plug router
   ```elixir
   forward("_incoming",
-    to: Receivex,
+    to: Webhoox,
     init_opts: [
-      adapter: Receivex.Adapter.Mailgun,
+      adapter: Webhoox.Adapter.Mailgun,
       adapter_opts: [
         api_key: "some-key"
       ],
@@ -60,7 +60,7 @@ defmodule Receivex do
 
   Example configuration for custom adapter
   ```elixir
-  forward("_incoming", Receivex,
+  forward("_incoming", Webhoox,
     adapter: Your.Custom.Adapter,
     adapter_opts: [some_option: "some-option"],
     handler: Your.Processor
@@ -70,9 +70,9 @@ defmodule Receivex do
   Example processor
   ```elixir
   defmodule Example.Processor do
-    @behaviour Receivex.Handler
+    @behaviour Webhoox.Handler
 
-    def process(%Receivex.Email{} = mail) do
+    def process(%Webhoox.Email{} = mail) do
       IO.inspect(mail)
     end
   end

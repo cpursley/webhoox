@@ -1,25 +1,25 @@
-defmodule Receivex.MixProject do
+defmodule Webhoox.MixProject do
   use Mix.Project
 
-  @version "0.8.2"
+  @version "0.1.0"
 
   def project do
     [
-      app: :receivex,
+      app: :webhoox,
       version: @version,
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       elixirc_paths: elixirc_paths(Mix.env()),
-      name: "Receivex",
-      description: "Handle incoming mail webhooks for common mail providers",
+      name: "Webhoox",
+      description: "Handle incoming webhooks via adapters",
       package: [
-        maintainers: ["Maarten van Vliet"],
+        maintainers: ["Chase Pursley"],
         licenses: ["MIT"],
-        links: %{"GitHub" => "https://github.com/maartenvanvliet/receivex"},
+        links: %{"GitHub" => "https://github.com/cpursley/webhoox"},
         files: ~w(LICENSE README.md lib mix.exs)
       ],
-      source_url: "https://github.com/maartenvanvliet/receivex",
+      source_url: "https://github.com/cpursley/webhoox",
       docs: [
         main: "readme",
         extras: ["README.md"]

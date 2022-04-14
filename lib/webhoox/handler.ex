@@ -1,4 +1,4 @@
-defmodule Receivex.Handler do
+defmodule Webhoox.Handler do
   @moduledoc """
   Behaviour for handling incoming webhook
   """

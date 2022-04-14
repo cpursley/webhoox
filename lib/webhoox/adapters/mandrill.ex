@@ -1,8 +1,8 @@
-defmodule Receivex.Adapter.Mandrill do
+defmodule Webhoox.Adapter.Mandrill do
   @moduledoc false
-  import Receivex.Parser
+  import Webhoox.Parser
 
-  @behaviour Receivex.Adapter
+  @behaviour Webhoox.Adapter
 
   @mandrill_header "x-mandrill-signature"
 
@@ -79,7 +79,7 @@ defmodule Receivex.Adapter.Mandrill do
           "ts" => ts
         }
       ) do
-    %Receivex.Email{
+    %Webhoox.Email{
       message_id: message_id,
       event: event,
       from: {msg["from_name"], msg["from_email"]},

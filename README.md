@@ -1,24 +1,26 @@
-# Receivex
+# Webhoox
 
-[![Build Status](https://travis-ci.com/maartenvanvliet/receivex.svg?branch=master)](https://travis-ci.com/maartenvanvliet/receivex) [![Hex pm](http://img.shields.io/hexpm/v/receivex.svg?style=flat)](https://hex.pm/packages/receivex) [![Hex Docs](https://img.shields.io/badge/hex-docs-9768d1.svg)](https://hexdocs.pm/receivex) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+Webhoox makes it easy to deal with inbound webhooks by using an adapter-based approach, saving you time.
 
-Package that makes it easy to deal with inbound webhooks.
+This library started off as a fork of [receivex](https://github.com/maartenvanvliet/receivex) which is focused on common email webhooks. Webhoox takes Maarten's awesome work and makes it generic.
 
 ## Adapters
 
-Right now [Mailgun](./lib/receivex/adapters/mailgun.ex) and [Mandrill](./lib/receivex/adapters/mandrill.ex) webhooks are supported out of the box.
+TODO: Move adapters out of core library
+
+Right now [Mailgun](./lib/webhoox/adapters/mailgun.ex) and [Mandrill](./lib/webhoox/adapters/mandrill.ex) webhooks are supported out of the box.
 
 You can implement your own adapter by following the existing adapters as an example.
 
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `receivex` to your list of dependencies in `mix.exs`:
+by adding `webhoox` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:receivex, "~> 0.8.2"}
+    {:webhoox, "~> 0.1.0"}
   ]
 end
 ```
@@ -26,8 +28,8 @@ end
 
 Example configuration for Mandrill with the Plug router
 ```elixir
-forward("_incoming", to: Receivex, init_opts: [
-  adapter: Receivex.Adapter.Mandrill,
+forward("_incoming", to: Webhoox, init_opts: [
+  adapter: Webhoox.Adapter.Mandrill,
   adapter_opts: [
     secret: "i8PTcm8glMgsfaWf75bS1FQ",
     url: "http://example.com"
@@ -38,8 +40,8 @@ forward("_incoming", to: Receivex, init_opts: [
 
 Example configuration for Mandrill with the Phoenix router
 ```elixir
-forward("_incoming", Receivex, [
-  adapter: Receivex.Adapter.Mandrill,
+forward("_incoming", Webhoox, [
+  adapter: Webhoox.Adapter.Mandrill,
   adapter_opts: [
     secret: "i8PTcm8glMgsfaWf75bS1FQ",
     url: "http://example.com"
@@ -50,8 +52,8 @@ forward("_incoming", Receivex, [
 
 Example configuration for Mailgun with the Plug router
 ```elixir
-forward("_incoming", to: Receivex, init_opts: [
-  adapter: Receivex.Adapter.Mailgun,
+forward("_incoming", to: Webhoox, init_opts: [
+  adapter: Webhoox.Adapter.Mailgun,
   adapter_opts: [
     api_key: "some-key"
   ],
@@ -62,9 +64,9 @@ forward("_incoming", to: Receivex, init_opts: [
 Example processor
 ```elixir
   defmodule Example.Processor do
-    @behaviour Receivex.Handler
+    @behaviour Webhoox.Handler
 
-    def process(%Receivex.Email{} = mail) do
+    def process(%Webhoox.Email{} = mail) do
       IO.inspect(mail)
     end
   end
@@ -73,5 +75,5 @@ Example processor
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/receivex](https://hexdocs.pm/receivex).
+be found at [https://hexdocs.pm/webhoox](https://hexdocs.pm/webhoox).
 
