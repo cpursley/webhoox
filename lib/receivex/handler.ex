@@ -1,6 +1,6 @@
 defmodule Receivex.Handler do
   @moduledoc """
-  Behaviour for handling incoming email
+  Behaviour for handling incoming webhook
   """
-  @callback process(email :: Receivex.Email.t()) :: :ok | {:error, String.t()}
+  @callback process(payload :: struct()) :: :ok | {:error, any()}
 end
