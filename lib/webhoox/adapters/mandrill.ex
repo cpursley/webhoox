@@ -79,7 +79,7 @@ defmodule Webhoox.Adapter.Mandrill do
           "ts" => ts
         }
       ) do
-    %Webhoox.Email{
+    %Webhoox.Data.Email{
       message_id: message_id,
       event: event,
       from: {msg["from_name"], msg["from_email"]},

@@ -1,4 +1,4 @@
-defmodule ReceivexTest do
+defmodule WebhooxTest do
   use ExUnit.Case
   use Plug.Test
 
@@ -37,7 +37,7 @@ defmodule ReceivexTest do
 
     @impl true
     def normalize_params(payload) do
-      %Webhoox.Email{
+      %Webhoox.Data.Email{
         from: {nil, payload["from"]},
         subject: nil,
         to: nil,
@@ -63,8 +63,8 @@ defmodule ReceivexTest do
     assert 200 == conn.status
     assert conn.halted
 
-    assert_receive {:email,
-                    %Webhoox.Email{
+    assert_receive {:webhook,
+                    %Webhoox.Data.Email{
                       from: {nil, "test@example.com"},
                       html: nil,
                       sender: nil,
@@ -100,7 +100,7 @@ defmodule ReceivexTest do
       assert conn.resp_body == "bad signature"
       assert conn.halted
 
-      refute_receive {:email, _}
+      refute_receive {:webhook, _}
     end
 
     test "returns user-provided error response" do
@@ -115,7 +115,7 @@ defmodule ReceivexTest do
       assert conn.resp_body == "{\"message\":\"Bad Request\"}"
       assert conn.halted
 
-      refute_receive {:email, _}
+      refute_receive {:webhook, _}
     end
   end
 end

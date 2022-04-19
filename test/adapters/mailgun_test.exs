@@ -106,11 +106,11 @@ defmodule Webhoox.Adapter.MailgunTest do
 
       {:ok, _conn} = Adapter.Mailgun.handle_webhook(conn, TestProcessor, api_key: "some key")
 
-      assert_receive {:email, %Webhoox.Email{}}
+      assert_receive {:webhook, %Webhoox.Data.Email{}}
     end
 
     test "normalizes email" do
-      assert %Webhoox.Email{
+      assert %Webhoox.Data.Email{
                message_id: "<517ACC75.5010709@mg.example.com>",
                sender: "bob@mg.example.com",
                to: [{"To Alice", "alice@mg.example.com"}],
@@ -130,11 +130,11 @@ defmodule Webhoox.Adapter.MailgunTest do
 
       {:ok, _conn} = Adapter.Mailgun.handle_webhook(conn, TestProcessor, api_key: "some key")
 
-      assert_receive {:email, %Webhoox.Email{}}
+      assert_receive {:webhook, %Webhoox.Data.Email{}}
     end
 
     test "normalizes email" do
-      assert %Webhoox.Email{
+      assert %Webhoox.Data.Email{
                message_id: "<517ACC75.5010709@mg.example.com>",
                event: "delivered",
                sender: "bob@mg.example.com",
@@ -155,11 +155,11 @@ defmodule Webhoox.Adapter.MailgunTest do
 
       {:ok, _conn} = Adapter.Mailgun.handle_webhook(conn, TestProcessor, api_key: "some key")
 
-      assert_receive {:email, %Webhoox.Email{}}
+      assert_receive {:webhook, %Webhoox.Data.Email{}}
     end
 
     test "normalizes email" do
-      assert %Webhoox.Email{
+      assert %Webhoox.Data.Email{
                message_id: "<517ACC75.5010709@mg.example.com>",
                event: "delivered",
                sender: nil,
@@ -180,6 +180,6 @@ defmodule Webhoox.Adapter.MailgunTest do
     {:error, _conn} =
       Adapter.Mailgun.handle_webhook(conn, TestProcessor, api_key: "incorrect key")
 
-    refute_receive {:email, %Webhoox.Email{}}
+    refute_receive {:webhook, %Webhoox.Data.Email{}}
   end
 end
