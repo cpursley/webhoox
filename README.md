@@ -9,6 +9,7 @@ This library started off as a fork of Maarten's awesome [receivex](https://githu
 - [Mailgun](./lib/webhoox/adapters/mailgun.ex)
 - [Mandrill](./lib/webhoox/adapters/mandrill.ex)
 - [Hasura](./lib/webhoox/adapters/hasura.ex)
+- [s3](./lib/webhoox/adapters/s3.ex)
 
 You can implement your own adapter by following the existing adapters as an example. Pull requests for new adapters welcome!
 

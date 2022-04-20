@@ -5,13 +5,14 @@ defmodule Webhoox.Adapter.Hasura do
   @behaviour Webhoox.Adapter
 
   import Plug.Conn
+  import Webhoox.Response
   alias Webhoox.Data.Hasura
 
   def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, api_key: api_key) do
     if authorized_request?(conn, api_key) do
-      handle_authorized_request(conn, params, handler)
+      authorized_request(conn, params, handler)
     else
-      handle_unauthorized_request(conn)
+      unauthorized_request(conn)
     end
   end
 
@@ -24,7 +25,7 @@ defmodule Webhoox.Adapter.Hasura do
     end
   end
 
-  defp handle_authorized_request(conn, params, handler) do
+  defp authorized_request(conn, params, handler) do
     response =
       params
       |> normalize_params()
@@ -41,29 +42,11 @@ defmodule Webhoox.Adapter.Hasura do
         {:ok, conn, resp}
 
       {:error, :bad_request} ->
-        handle_bad_request(conn)
+        bad_request(conn)
 
       _ ->
-        handle_bad_request(conn)
+        bad_request(conn)
     end
-  end
-
-  defp handle_unauthorized_request(conn) do
-    error_resp = %{
-      body: %{message: "Unauthorized", code: "401"},
-      code: :unauthorized
-    }
-
-    {:error, conn, error_resp}
-  end
-
-  defp handle_bad_request(conn) do
-    error_resp = %{
-      body: %{message: "Bad Request", code: "400"},
-      code: :bad_request
-    }
-
-    {:error, conn, error_resp}
   end
 
   @doc """
@@ -77,7 +60,6 @@ defmodule Webhoox.Adapter.Hasura do
         "session_variables" => session_variables
       }) do
     %Hasura.Action{
-      # type: :action,
       name: name,
       input: input,
       session_variables: session_variables
