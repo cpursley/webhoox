@@ -6,6 +6,7 @@ This library started off as a fork of Maarten's awesome [receivex](https://githu
 
 ## Adapters
 
+- [Mailgun](./lib/webhoox/adapters/mailersend.ex)
 - [Mailgun](./lib/webhoox/adapters/mailgun.ex)
 - [Mandrill](./lib/webhoox/adapters/mandrill.ex)
 - [Hasura](./lib/webhoox/adapters/hasura.ex)
@@ -15,13 +16,13 @@ You can implement your own adapter by following the existing adapters as an exam
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
+[Available in Hex](https://hex.pm/packages/webhoox), the package can be installed
 by adding `webhoox` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:webhoox, "~> 0.1.1"}
+    {:webhoox, "~> 0.1.3"}
   ]
 end
 ```
@@ -55,5 +56,5 @@ Example Processor:
   end
 ```
 
-Documentation can be found at [https://hexdocs.pm/webhoox](https://hexdocs.pm/webhoox).
+Documentation can be found at [https://hex.pm/packages/webhoox](https://hex.pm/packages/webhoox).
 
