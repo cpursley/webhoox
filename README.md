@@ -6,7 +6,7 @@ This library started off as a fork of Maarten's awesome [receivex](https://githu
 
 ## Adapters
 
-- [Mailgun](./lib/webhoox/adapters/mailersend.ex)
+- [MailerSend](./lib/webhoox/adapters/mailersend.ex)
 - [Mailgun](./lib/webhoox/adapters/mailgun.ex)
 - [Mandrill](./lib/webhoox/adapters/mandrill.ex)
 - [Hasura](./lib/webhoox/adapters/hasura.ex)
