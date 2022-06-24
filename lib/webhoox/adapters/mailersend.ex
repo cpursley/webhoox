@@ -29,7 +29,6 @@ defmodule Webhoox.Adapter.Mailersend do
   defp valid_signature?(conn, signing_secret) do
     [signature] = get_req_header(conn, "signature")
     body = conn.assigns[:raw_body]
-    IO.inspect(body)
 
     :crypto.mac(:hmac, :sha256, signing_secret, body)
     |> Base.encode16(case: :lower)

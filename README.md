@@ -49,9 +49,9 @@ Example Processor:
   defmodule Example.Processor do
     @behaviour Webhoox.Handler
 
-    def process(%Webhoox.Data.Email{} = mail) do
+    def process(%Webhoox.Data.Email{} = email) do
       # Do stuff with the webhook event data here
-      IO.inspect(mail)
+      IO.inspect(email)
     end
   end
 ```

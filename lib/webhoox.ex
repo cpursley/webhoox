@@ -11,7 +11,7 @@ defmodule Webhoox do
   ```elixir
   def deps do
   [
-    {:webhoox, "~> 0.1.0"}
+    {:webhoox, "~> 0.1.3"}
   ]
   end
   ```
@@ -72,8 +72,8 @@ defmodule Webhoox do
   defmodule Example.Processor do
     @behaviour Webhoox.Handler
 
-    def process(%Webhoox.Data.Email{} = mail) do
-      IO.inspect(mail)
+    def process(%Webhoox.Data.Email{} = email) do
+      IO.inspect(email)
     end
   end
 
