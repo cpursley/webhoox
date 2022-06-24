@@ -13,7 +13,6 @@ defmodule Webhoox.Adapter.Mailersend do
   def handle_webhook(conn, handler, opts) do
     signing_secret = Keyword.fetch!(opts, :signing_secret)
 
-    # i think the problem is the string escapes
     case valid_signature?(conn, signing_secret) do
       true ->
         conn.body_params
