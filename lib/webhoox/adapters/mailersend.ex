@@ -40,6 +40,7 @@ defmodule Webhoox.Adapter.Mailersend do
   """
   def normalize_params(
         email = %{
+          "created_at" => timestamp,
           "data" => %{
             "email" => %{
               "from" => sender,
@@ -50,10 +51,9 @@ defmodule Webhoox.Adapter.Mailersend do
                 "email" => to
               },
               "subject" => subject
-            },
-            "type" => event,
-            "created_at" => timestamp
-          }
+            }
+          },
+          "type" => event
         }
       ) do
     %Webhoox.Data.Email{

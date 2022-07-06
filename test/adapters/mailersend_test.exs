@@ -62,12 +62,12 @@ defmodule Webhoox.Adapter.MailersendTest do
     test "normalizes email" do
       assert %Webhoox.Data.Email{
                message_id: "5fc0d003f718c90162341852",
-               event: "sent",
+               event: "activity.sent",
                sender: "test@mailersend.com",
                to: [{"", "test@mailersend.com"}],
                from: {"", "test@mailersend.com"},
                subject: "Test email",
-               timestamp: "2020-11-27T10:08:06.258000Z",
+               timestamp: "2020-11-27T10:08:08.298647Z",
                raw_params: @mailersend_activity_params
              } == Adapter.Mailersend.normalize_params(@mailersend_activity_params)
     end
