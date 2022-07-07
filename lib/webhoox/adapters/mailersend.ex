@@ -68,5 +68,35 @@ defmodule Webhoox.Adapter.Mailersend do
     }
   end
 
+  def normalize_params(
+        email = %{
+          "created_at" => timestamp,
+          "data" => %{
+            "from" => %{"email" => sender},
+            "html" => html,
+            "text" => text,
+            "id" => message_id,
+            "subject" => subject,
+            "recipients" => %{
+              "to" => %{"raw" => to}
+            }
+          },
+          "type" => event
+        }
+      ) do
+    %Webhoox.Data.Email{
+      message_id: message_id,
+      event: event,
+      sender: sender,
+      to: parse_recipients(to),
+      from: parse_address(sender),
+      subject: subject,
+      html: html,
+      text: text,
+      timestamp: parse_timestamp(timestamp),
+      raw_params: email
+    }
+  end
+
   def normalize_params(_), do: nil
 end
