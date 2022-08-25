@@ -25,7 +25,7 @@ defmodule Webhoox.Adapter.ParsioTest do
     test "webhook" do
       conn = setup_webhook(@parsio_params)
 
-      {:ok, _conn, %Parsio{} = resp} = Adapter.Parsio.handle_webhook(conn, TestProcessor)
+      {:ok, _conn, %Parsio{} = resp} = Adapter.Parsio.handle_webhook(conn, TestProcessor, [])
 
       assert_receive {:webhook, %Parsio{}}
 

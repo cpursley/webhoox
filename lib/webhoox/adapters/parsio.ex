@@ -7,7 +7,7 @@ defmodule Webhoox.Adapter.Parsio do
   import Webhoox.Response
   alias Webhoox.Data.Parsio
 
-  def handle_webhook(conn = %Plug.Conn{body_params: params}, handler) do
+  def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, _opts) do
     authorized_request(conn, params, handler)
   end
 
