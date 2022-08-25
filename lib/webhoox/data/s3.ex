@@ -1,6 +1,6 @@
 defmodule Webhoox.Data.S3 do
   @moduledoc """
-  Struct modeling incoming s3 compatable Events
+  Struct modeling incoming s3 compatible Events
   """
   @type t :: %__MODULE__{
           event: String.t(),

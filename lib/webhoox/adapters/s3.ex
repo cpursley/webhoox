@@ -1,6 +1,6 @@
 defmodule Webhoox.Adapter.S3 do
   @moduledoc """
-  Webhoox Adapter for s3 compatable Events
+  Webhoox Adapter for s3 compatible Events
   """
   @behaviour Webhoox.Adapter
 
@@ -47,7 +47,7 @@ defmodule Webhoox.Adapter.S3 do
   end
 
   @doc """
-  Handles an s3 compatable webhook:
+  Handles an s3 compatible webhook:
     - https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-event-types-and-destinations.html
     - https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-content-structure.html
     - https://docs.min.io/docs/minio-bucket-notification-guide.html
@@ -58,7 +58,7 @@ defmodule Webhoox.Adapter.S3 do
         "Key" => key,
         "Records" => records
       }) do
-    %Webhoox.Data.S3{
+    %S3{
       event: event,
       key: key,
       records: records
@@ -78,7 +78,7 @@ defmodule Webhoox.Adapter.S3 do
             }
           ] = records
       }) do
-    %Webhoox.Data.S3{
+    %S3{
       event: event,
       key: key,
       records: records

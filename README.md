@@ -11,6 +11,7 @@ This library started off as a fork of Maarten's awesome [receivex](https://githu
 - [Mandrill](./lib/webhoox/adapters/mandrill.ex)
 - [Hasura](./lib/webhoox/adapters/hasura.ex)
 - [s3](./lib/webhoox/adapters/s3.ex)
+- [Parsio](./lib/webhoox/adapters/parsio.ex)
 
 You can implement your own adapter by following the existing adapters as an example. Pull requests for new adapters welcome!
 
@@ -22,7 +23,7 @@ by adding `webhoox` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:webhoox, "~> 0.1.5"}
+    {:webhoox, "~> 0.1.6"}
   ]
 end
 ```
