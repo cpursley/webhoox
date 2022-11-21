@@ -4,7 +4,7 @@ defmodule Webhoox.Adapter.ParsioTest do
   alias Webhoox.Adapter
   alias Webhoox.Data.Parsio
 
-  @signature "751a9f2aa47aafff214cf2320ff8bfaa2d31ab939b9bbc364a6c3339b43b8db1"
+  @signature "dRqfKqR6r/8hTPIyD/i/qi0xq5Obm7w2SmwzObQ7jbE="
   @signing_secret "signing_secret"
 
   @parsio_params %{

@@ -12,7 +12,7 @@ defmodule Webhoox.Adapter.Mailersend do
   def handle_webhook(conn, handler, opts) do
     signing_secret = Keyword.fetch!(opts, :signing_secret)
 
-    case valid_signature?(conn, signing_secret, "signature") do
+    case valid_signature?(:base16, conn, signing_secret, "signature") do
       true ->
         conn.body_params
         |> normalize_params()

@@ -11,7 +11,7 @@ defmodule Webhoox.Adapter.Parsio do
   def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, opts) do
     signing_secret = Keyword.fetch!(opts, :signing_secret)
 
-    case valid_signature?(conn, signing_secret, "parsio-signature") do
+    case valid_signature?(:base64, conn, signing_secret, "parsio-signature") do
       true ->
         authorized_request(conn, params, handler)
 

@@ -23,7 +23,7 @@ by adding `webhoox` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:webhoox, "~> 0.1.7"}
+    {:webhoox, "~> 0.1.8"}
   ]
 end
 ```
