@@ -1,6 +1,5 @@
 defmodule Webhoox.Adapter.MailersendTest do
   use ExUnit.Case
-  use Plug.Test
 
   alias Webhoox.Adapter
 
@@ -94,15 +93,10 @@ defmodule Webhoox.Adapter.MailersendTest do
     "url" => "https://your-domain.com/webhook"
   }
 
-  defp setup_webhook(mailersend_params, signature) do
-    conn(:post, "/_incoming", mailersend_params)
-    |> put_req_header("signature", signature)
-    |> Plug.Conn.assign(:raw_body, Jason.encode!(mailersend_params))
-  end
-
   describe "'activity' webhook" do
     test "processes valid webhook" do
-      conn = setup_webhook(@mailersend_activity_params, @activity_signature)
+      conn =
+        TestHelper.setup_webhook(@mailersend_activity_params, @activity_signature, "signature")
 
       {:ok, _conn} =
         Adapter.Mailersend.handle_webhook(conn, TestProcessor, signing_secret: @signing_secret)
@@ -126,7 +120,7 @@ defmodule Webhoox.Adapter.MailersendTest do
 
   describe "'inbound' webhook" do
     test "processes valid webhook" do
-      conn = setup_webhook(@mailersend_inbound_params, @inbound_signature)
+      conn = TestHelper.setup_webhook(@mailersend_inbound_params, @inbound_signature, "signature")
 
       {:ok, _conn} =
         Adapter.Mailersend.handle_webhook(conn, TestProcessor, signing_secret: @signing_secret)

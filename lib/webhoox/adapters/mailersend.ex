@@ -5,15 +5,14 @@ defmodule Webhoox.Adapter.Mailersend do
   - https://stackoverflow.com/questions/41510957/read-the-raw-body-from-a-plug-connection-after-parsers-in-elixir
   - https://hexdocs.pm/plug/Plug.Parsers.html#module-custom-body-reader
   """
-  import Plug.Conn
-  import Webhoox.Parser
+  import Webhoox.{Authentication, Parser}
 
   @behaviour Webhoox.Adapter
 
   def handle_webhook(conn, handler, opts) do
     signing_secret = Keyword.fetch!(opts, :signing_secret)
 
-    case valid_signature?(conn, signing_secret) do
+    case valid_signature?(conn, signing_secret, "signature") do
       true ->
         conn.body_params
         |> normalize_params()
@@ -24,15 +23,6 @@ defmodule Webhoox.Adapter.Mailersend do
       _ ->
         {:error, conn}
     end
-  end
-
-  defp valid_signature?(conn, signing_secret) do
-    [signature] = get_req_header(conn, "signature")
-    body = conn.assigns[:raw_body]
-
-    :crypto.mac(:hmac, :sha256, signing_secret, body)
-    |> Base.encode16(case: :lower)
-    |> Plug.Crypto.secure_compare(signature)
   end
 
   @doc """

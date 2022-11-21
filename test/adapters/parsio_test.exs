@@ -1,11 +1,12 @@
 defmodule Webhoox.Adapter.ParsioTest do
   use ExUnit.Case
-  use Plug.Test
 
   alias Webhoox.Adapter
   alias Webhoox.Data.Parsio
 
-  # Parsio Webhook: https://help.parsio.io/data-export-integrations/send-data-to-webhook-1
+  @signature "751a9f2aa47aafff214cf2320ff8bfaa2d31ab939b9bbc364a6c3339b43b8db1"
+  @signing_secret "signing_secret"
+
   @parsio_params %{
     "doc_id" => "730650df7ff9cax011f312c5",
     "event" => "doc.parsed",
@@ -17,15 +18,12 @@ defmodule Webhoox.Adapter.ParsioTest do
     }
   }
 
-  defp setup_webhook(parsio_params) do
-    conn(:post, "/_incoming", parsio_params)
-  end
+  describe "Doc Parsed webhook" do
+    test "processes valid webhook" do
+      conn = TestHelper.setup_webhook(@parsio_params, @signature, "parsio-signature")
 
-  describe "Doc" do
-    test "webhook" do
-      conn = setup_webhook(@parsio_params)
-
-      {:ok, _conn, %Parsio{} = resp} = Adapter.Parsio.handle_webhook(conn, TestProcessor, [])
+      {:ok, _conn, %Parsio{} = resp} =
+        Adapter.Parsio.handle_webhook(conn, TestProcessor, signing_secret: @signing_secret)
 
       assert_receive {:webhook, %Parsio{}}
 

@@ -1,14 +1,23 @@
 defmodule Webhoox.Adapter.Parsio do
   @moduledoc """
   Parsio.io Adapter
+  - https://help.parsio.io/data-export-integrations/send-data-to-webhook-1#secure-your-webhooks-optional
   """
-  @behaviour Webhoox.Adapter
-
-  import Webhoox.Response
+  import Webhoox.{Authentication, Response}
   alias Webhoox.Data.Parsio
 
-  def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, _opts) do
-    authorized_request(conn, params, handler)
+  @behaviour Webhoox.Adapter
+
+  def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, opts) do
+    signing_secret = Keyword.fetch!(opts, :signing_secret)
+
+    case valid_signature?(conn, signing_secret, "parsio-signature") do
+      true ->
+        authorized_request(conn, params, handler)
+
+      _ ->
+        unauthorized_request(conn)
+    end
   end
 
   defp authorized_request(conn, params, handler) do
