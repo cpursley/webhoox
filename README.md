@@ -51,8 +51,10 @@ Example Processor:
     @behaviour Webhoox.Handler
 
     def process(%Webhoox.Data.Email{} = email) do
-      # Do stuff with the webhook event data here
-      IO.inspect(email)
+      # You probably want to handle processing of the event asynchronously
+      # and go ahead and return a 200 as not to block the sending server
+      
+      {:ok, "200 OK"}
     end
   end
 ```
