@@ -1,13 +1,13 @@
 defmodule Webhoox.MixProject do
   use Mix.Project
 
-  @version "0.1.8"
+  @version "0.2.0"
 
   def project do
     [
       app: :webhoox,
       version: @version,
-      elixir: "~> 1.13.4",
+      elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -40,7 +40,7 @@ defmodule Webhoox.MixProject do
   defp deps do
     [
       {:plug, "~> 1.14.2"},
-      {:jason, "~> 1.4.1", only: [:dev, :test]},
+      {:jason, "~> 1.4", only: [:dev, :test]},
       {:ex_doc, "~> 0.30.4", only: :dev},
       {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false}
     ]
