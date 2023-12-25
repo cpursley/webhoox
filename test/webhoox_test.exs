@@ -84,7 +84,7 @@ defmodule WebhooxTest do
       conn = Webhoox.call(conn, @opts)
 
       assert conn.status == 200
-      assert conn.resp_body == "{\"body\":{\"hello\":\"World\"},\"code\":\"ok\"}"
+      assert conn.resp_body == "{\"code\":\"ok\",\"body\":{\"hello\":\"World\"}}"
       assert conn.halted
     end
 

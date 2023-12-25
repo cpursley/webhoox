@@ -39,10 +39,10 @@ defmodule Webhoox.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug, "~> 1.14.2"},
+      {:plug, "~> 1.15.2"},
       {:jason, "~> 1.4", only: [:dev, :test]},
-      {:ex_doc, "~> 0.30.4", only: :dev},
-      {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false}
+      {:ex_doc, "~> 0.31.0", only: :dev},
+      {:credo, "~> 1.7.2", only: [:dev, :test], runtime: false}
     ]
   end
 end
