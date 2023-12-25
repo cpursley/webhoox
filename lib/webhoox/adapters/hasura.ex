@@ -8,7 +8,9 @@ defmodule Webhoox.Adapter.Hasura do
   import Webhoox.Response
   alias Webhoox.Data.Hasura
 
-  def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, api_key: api_key) do
+  def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, opts) do
+    api_key = Keyword.fetch!(opts, :api_key)
+
     if authorized_request?(conn, api_key) do
       authorized_request(conn, params, handler)
     else
