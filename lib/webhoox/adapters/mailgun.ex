@@ -2,7 +2,7 @@ defmodule Webhoox.Adapter.Mailgun do
   @moduledoc false
   @behaviour Webhoox.Adapter
 
-  import Webhoox.Parser
+  import Webhoox.Utility.Parser
 
   def handle_webhook(conn, handler, opts) do
     payload = conn.body_params

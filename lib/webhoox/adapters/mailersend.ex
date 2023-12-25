@@ -5,7 +5,8 @@ defmodule Webhoox.Adapter.Mailersend do
   - https://stackoverflow.com/questions/41510957/read-the-raw-body-from-a-plug-connection-after-parsers-in-elixir
   - https://hexdocs.pm/plug/Plug.Parsers.html#module-custom-body-reader
   """
-  import Webhoox.{Authentication, Parser}
+  import Webhoox.Authentication
+  import Webhoox.Utility.Parser
 
   @behaviour Webhoox.Adapter
 

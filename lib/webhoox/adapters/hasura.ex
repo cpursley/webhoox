@@ -5,7 +5,7 @@ defmodule Webhoox.Adapter.Hasura do
   @behaviour Webhoox.Adapter
 
   import Plug.Conn
-  import Webhoox.Response
+  import Webhoox.Utility.Response
   alias Webhoox.Webhook.Hasura
 
   def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, opts) do

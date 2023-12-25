@@ -1,6 +1,6 @@
-defmodule Webhoox.Parser.Test do
+defmodule Webhoox.Utility.Parser.Test do
   use ExUnit.Case
-  import Webhoox.Parser
+  import Webhoox.Utility.Parser
 
   test "parse_timestamp/1: returns timestamp string" do
     assert parse_timestamp("1544797214") == "1544797214"

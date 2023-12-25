@@ -1,6 +1,6 @@
 defmodule Webhoox.Adapter.Mandrill do
   @moduledoc false
-  import Webhoox.Parser
+  import Webhoox.Utility.Parser
 
   @behaviour Webhoox.Adapter
 
