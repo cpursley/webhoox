@@ -37,7 +37,7 @@ defmodule WebhooxTest do
 
     @impl true
     def normalize_params(payload) do
-      %Webhoox.Data.Email{
+      %Webhoox.Webhook.Email{
         from: {nil, payload["from"]},
         subject: nil,
         to: nil,
@@ -64,7 +64,7 @@ defmodule WebhooxTest do
     assert conn.halted
 
     assert_receive {:webhook,
-                    %Webhoox.Data.Email{
+                    %Webhoox.Webhook.Email{
                       from: {nil, "test@example.com"},
                       html: nil,
                       sender: nil,

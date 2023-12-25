@@ -50,7 +50,7 @@ Example Processor:
   defmodule Example.Processor do
     @behaviour Webhoox.Handler
 
-    def process(%Webhoox.Data.Email{} = email) do
+    def process(%Webhoox.Webhook.Email{} = email) do
       # You probably want to handle processing of the event asynchronously
       # and go ahead and return a 200 as not to block the sending server
       

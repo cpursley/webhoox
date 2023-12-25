@@ -1,4 +1,4 @@
-defmodule Webhoox.Data.Hasura.Action do
+defmodule Webhoox.Webhook.Hasura.Action do
   @moduledoc """
   Struct modeling incoming Hasura Action
   """
@@ -11,7 +11,7 @@ defmodule Webhoox.Data.Hasura.Action do
   defstruct [:name, :input, :request_query, :session_variables]
 end
 
-defmodule Webhoox.Data.Hasura.Event do
+defmodule Webhoox.Webhook.Hasura.Event do
   @moduledoc """
   Struct modeling incoming Hasura Event
   """

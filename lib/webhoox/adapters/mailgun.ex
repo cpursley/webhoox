@@ -82,7 +82,7 @@ defmodule Webhoox.Adapter.Mailgun do
           }
         }
       ) do
-    %Webhoox.Data.Email{
+    %Webhoox.Webhook.Email{
       message_id: message_id,
       event: event,
       sender: sender,
@@ -107,7 +107,7 @@ defmodule Webhoox.Adapter.Mailgun do
           }
         }
       ) do
-    %Webhoox.Data.Email{
+    %Webhoox.Webhook.Email{
       message_id: message_id,
       event: event,
       timestamp: parse_timestamp(timestamp),
@@ -127,7 +127,7 @@ defmodule Webhoox.Adapter.Mailgun do
           "timestamp" => timestamp
         }
       ) do
-    %Webhoox.Data.Email{
+    %Webhoox.Webhook.Email{
       message_id: message_id,
       sender: sender,
       to: parse_email_recipients(to),

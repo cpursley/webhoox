@@ -1,4 +1,4 @@
-defmodule Webhoox.Data.S3 do
+defmodule Webhoox.Webhook.S3 do
   @moduledoc """
   Struct modeling incoming s3 compatible Events
   """

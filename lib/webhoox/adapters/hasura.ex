@@ -6,7 +6,7 @@ defmodule Webhoox.Adapter.Hasura do
 
   import Plug.Conn
   import Webhoox.Response
-  alias Webhoox.Data.Hasura
+  alias Webhoox.Webhook.Hasura
 
   def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, opts) do
     api_key = Keyword.fetch!(opts, :api_key)

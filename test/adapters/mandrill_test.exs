@@ -22,7 +22,7 @@ defmodule Webhoox.Adapter.MandrillTest do
         secret: "secret"
       )
 
-    refute_receive {:webhook, %Webhoox.Data.Email{}}
+    refute_receive {:webhook, %Webhoox.Webhook.Email{}}
   end
 
   test "processes valid webhook" do
@@ -34,7 +34,7 @@ defmodule Webhoox.Adapter.MandrillTest do
         secret: "secret"
       )
 
-    assert_receive {:webhook, %Webhoox.Data.Email{}}
+    assert_receive {:webhook, %Webhoox.Webhook.Email{}}
   end
 
   test "returns error for valid webhook" do
@@ -46,13 +46,13 @@ defmodule Webhoox.Adapter.MandrillTest do
         secret: "incorrect secret"
       )
 
-    refute_receive {:webhook, %Webhoox.Data.Email{}}
+    refute_receive {:webhook, %Webhoox.Webhook.Email{}}
   end
 
   test "normalizes email" do
     [event1, _] = Jason.decode!(File.read!("./test/fixtures/mandrill.json"))
 
-    assert %Webhoox.Data.Email{
+    assert %Webhoox.Webhook.Email{
              message_id:
                "<999.20130510192820.aaaaaaaaaaaaaa.aaaaaaaa@mail115.us4.mandrillapp.com>",
              event: "inbound",

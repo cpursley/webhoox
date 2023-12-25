@@ -72,7 +72,7 @@ defmodule Webhoox do
   defmodule Example.Processor do
     @behaviour Webhoox.Handler
 
-    def process(%Webhoox.Data.Email{} = email) do
+    def process(%Webhoox.Webhook.Email{} = email) do
       IO.inspect(email)
     end
   end

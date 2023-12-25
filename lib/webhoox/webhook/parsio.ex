@@ -1,4 +1,4 @@
-defmodule Webhoox.Data.Parsio do
+defmodule Webhoox.Webhook.Parsio do
   @moduledoc """
   Struct modeling incoming Parsio parsed email
   """

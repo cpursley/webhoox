@@ -101,11 +101,11 @@ defmodule Webhoox.Adapter.MailersendTest do
       {:ok, _conn} =
         Adapter.Mailersend.handle_webhook(conn, TestProcessor, signing_secret: @signing_secret)
 
-      assert_receive {:webhook, %Webhoox.Data.Email{}}
+      assert_receive {:webhook, %Webhoox.Webhook.Email{}}
     end
 
     test "normalizes email" do
-      assert %Webhoox.Data.Email{
+      assert %Webhoox.Webhook.Email{
                message_id: "5fc0d003f718c90162341852",
                event: "activity.sent",
                sender: "test@mailersend.com",
@@ -125,11 +125,11 @@ defmodule Webhoox.Adapter.MailersendTest do
       {:ok, _conn} =
         Adapter.Mailersend.handle_webhook(conn, TestProcessor, signing_secret: @signing_secret)
 
-      assert_receive {:webhook, %Webhoox.Data.Email{}}
+      assert_receive {:webhook, %Webhoox.Webhook.Email{}}
     end
 
     test "normalizes email" do
-      assert %Webhoox.Data.Email{
+      assert %Webhoox.Webhook.Email{
                message_id: "52c5d374f807dd7eec0886a1",
                event: "inbound.message",
                sender: "test@mailersend.com",

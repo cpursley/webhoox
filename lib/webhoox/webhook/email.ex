@@ -1,4 +1,4 @@
-defmodule Webhoox.Data.Email do
+defmodule Webhoox.Webhook.Email do
   @moduledoc """
   Struct modeling incoming email
   """

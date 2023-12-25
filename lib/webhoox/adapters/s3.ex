@@ -6,7 +6,7 @@ defmodule Webhoox.Adapter.S3 do
 
   import Plug.Conn
   import Webhoox.Response
-  alias Webhoox.Data.S3
+  alias Webhoox.Webhook.S3
 
   def handle_webhook(conn = %Plug.Conn{body_params: params}, handler, opts) do
     api_key = Keyword.fetch!(opts, :api_key)

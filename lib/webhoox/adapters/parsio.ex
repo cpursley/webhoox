@@ -4,7 +4,7 @@ defmodule Webhoox.Adapter.Parsio do
   - https://help.parsio.io/data-export-integrations/send-data-to-webhook-1#secure-your-webhooks-optional
   """
   import Webhoox.{Authentication, Response}
-  alias Webhoox.Data.Parsio
+  alias Webhoox.Webhook.Parsio
 
   @behaviour Webhoox.Adapter
 

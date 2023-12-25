@@ -3,7 +3,7 @@ defmodule Webhoox.Adapter.HasuraTest do
   use Plug.Test
 
   alias Webhoox.Adapter
-  alias Webhoox.Data.Hasura
+  alias Webhoox.Webhook.Hasura
 
   @api_key "valid-api-key"
 

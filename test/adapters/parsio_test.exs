@@ -2,7 +2,7 @@ defmodule Webhoox.Adapter.ParsioTest do
   use ExUnit.Case
 
   alias Webhoox.Adapter
-  alias Webhoox.Data.Parsio
+  alias Webhoox.Webhook.Parsio
 
   @signature "dRqfKqR6r/8hTPIyD/i/qi0xq5Obm7w2SmwzObQ7jbE="
   @signing_secret "signing_secret"

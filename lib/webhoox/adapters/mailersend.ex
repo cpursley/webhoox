@@ -46,7 +46,7 @@ defmodule Webhoox.Adapter.Mailersend do
           "type" => event
         }
       ) do
-    %Webhoox.Data.Email{
+    %Webhoox.Webhook.Email{
       message_id: message_id,
       event: event,
       sender: sender,
@@ -74,7 +74,7 @@ defmodule Webhoox.Adapter.Mailersend do
           "type" => event
         }
       ) do
-    %Webhoox.Data.Email{
+    %Webhoox.Webhook.Email{
       message_id: message_id,
       event: event,
       sender: sender,

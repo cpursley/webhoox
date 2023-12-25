@@ -3,7 +3,7 @@ defmodule Webhoox.Adapter.S3Test do
   use Plug.Test
 
   alias Webhoox.Adapter
-  alias Webhoox.Data.S3
+  alias Webhoox.Webhook.S3
 
   @api_key "valid-api-key"
 
