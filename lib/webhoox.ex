@@ -99,16 +99,24 @@ defmodule Webhoox do
 
     case adapter.handle_webhook(conn, handler, adapter_opts) do
       {:ok, conn} ->
-        conn |> send_resp(:ok, "ok") |> halt()
+        conn
+        |> send_resp(:ok, "ok")
+        |> halt()
 
       {:ok, conn, resp} ->
-        conn |> send_resp(:ok, Jason.encode!(resp)) |> halt()
+        conn
+        |> send_resp(:ok, Jason.encode!(resp))
+        |> halt()
 
       {:error, conn} ->
-        conn |> send_resp(:forbidden, "bad signature") |> halt()
+        conn
+        |> send_resp(:forbidden, "bad signature")
+        |> halt()
 
       {:error, conn, error_resp} ->
-        conn |> send_resp(error_resp.code, Jason.encode!(error_resp.body)) |> halt()
+        conn
+        |> send_resp(error_resp.code, Jason.encode!(error_resp.body))
+        |> halt()
     end
   end
 end

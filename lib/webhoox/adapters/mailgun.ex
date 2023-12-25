@@ -86,8 +86,8 @@ defmodule Webhoox.Adapter.Mailgun do
       message_id: message_id,
       event: event,
       sender: sender,
-      to: parse_recipients(to),
-      from: parse_address(from),
+      to: parse_email_recipients(to),
+      from: parse_email_address(from),
       subject: subject,
       timestamp: parse_timestamp(timestamp),
       raw_params: email
@@ -130,8 +130,8 @@ defmodule Webhoox.Adapter.Mailgun do
     %Webhoox.Data.Email{
       message_id: message_id,
       sender: sender,
-      to: parse_recipients(to),
-      from: parse_address(from),
+      to: parse_email_recipients(to),
+      from: parse_email_address(from),
       subject: subject,
       html: html,
       text: text,

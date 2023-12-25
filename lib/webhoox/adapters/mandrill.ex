@@ -84,7 +84,7 @@ defmodule Webhoox.Adapter.Mandrill do
       event: event,
       from: {msg["from_name"], msg["from_email"]},
       subject: subject,
-      to: parse_recipients(to),
+      to: parse_email_recipients(to),
       html: html,
       text: text,
       timestamp: parse_timestamp(ts),

@@ -8,7 +8,7 @@ defmodule Webhoox.Parser do
 
   @name_email_regex ~r/(?<name>.*)<(?<email>.*)>/
   @email_regex ~r/^[\w.!#$%&'*+\-\/=?\^`{|}~]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/i
-  def parse_address(address) when is_binary(address) do
+  def parse_email_address(address) when is_binary(address) do
     name_and_email = Regex.named_captures(@name_email_regex, address)
 
     cond do
@@ -29,18 +29,18 @@ defmodule Webhoox.Parser do
     end
   end
 
-  def parse_address(_address), do: nil
+  def parse_email_address(_address), do: nil
 
-  def parse_recipients(recipients) when is_binary(recipients) do
+  def parse_email_recipients(recipients) when is_binary(recipients) do
     recipients
     |> String.split(",")
-    |> Enum.map(&parse_address(&1))
+    |> Enum.map(&parse_email_address(&1))
   end
 
-  def parse_recipients(recipients) when is_list(recipients) do
+  def parse_email_recipients(recipients) when is_list(recipients) do
     recipients
     |> Enum.map(fn [email, name] -> {name, email} end)
   end
 
-  def parse_recipients(_recipients), do: nil
+  def parse_email_recipients(_recipients), do: nil
 end
