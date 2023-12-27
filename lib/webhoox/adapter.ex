@@ -7,6 +7,4 @@ defmodule Webhoox.Adapter do
               | {:ok, conn :: Plug.Conn.t(), map()}
               | {:error, conn :: Plug.Conn.t(), String.t()}
               | {:error, conn :: Plug.Conn.t(), String.t(), map()}
-
-  @callback normalize_params(payload :: any()) :: struct() | nil
 end

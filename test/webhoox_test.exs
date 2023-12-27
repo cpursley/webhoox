@@ -5,7 +5,6 @@ defmodule WebhooxTest do
   defmodule TestAdapter do
     @behaviour Webhoox.Adapter
 
-    @impl true
     def handle_webhook(conn, handler, _opts) do
       case conn.body_params do
         %{"invalid" => "true"} ->
@@ -35,7 +34,6 @@ defmodule WebhooxTest do
       end
     end
 
-    @impl true
     def normalize_params(payload) do
       %Webhoox.Webhook.Email{
         from: {nil, payload["from"]},

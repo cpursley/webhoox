@@ -5,7 +5,7 @@ defmodule Webhoox.Webhook.StandardWebhook do
   """
   @type t :: %__MODULE__{
           id: String.t(),
-          timestamp: String.t(),
+          timestamp: Integer.t(),
           payload: map()
         }
 
