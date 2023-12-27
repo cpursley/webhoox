@@ -1,5 +1,8 @@
 defmodule Webhoox.Authentication.StandardWebhook do
-  @moduledoc false
+  @moduledoc """
+  Standard Webhook Authentication (verify and sign)
+  Read more here: https://standardwebhooks.com
+  """
   import Plug.Conn
 
   @secret_prefix "whsec_"

@@ -5,8 +5,6 @@ defmodule Webhoox.Authentication.StandardWebhookTest do
   alias Webhoox.Authentication.StandardWebhook, as: Authentication
 
   @id "msg_p5jXN8AQM9LWM0D4loKWxJek"
-  # temp, generate this for current time!
-  # @timestamp 1_674_087_231
   @timestamp :os.system_time(:second)
   @tolerance 5 * 60
   @payload %{"event_type" => "ping"}

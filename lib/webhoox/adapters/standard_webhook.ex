@@ -1,6 +1,7 @@
 defmodule Webhoox.Adapter.StandardWebhook do
   @moduledoc """
   Standard Webhook Adapter
+  Read more here: https://standardwebhooks.com
   """
   import Plug.Conn
   import Webhoox.Utility.Response
