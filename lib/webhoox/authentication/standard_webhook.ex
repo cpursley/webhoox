@@ -14,9 +14,7 @@ defmodule Webhoox.Authentication.StandardWebhook do
   """
   @spec verify(Plug.Conn.t(), map(), binary()) :: boolean()
   def verify(conn, payload, @secret_prefix <> encoded_secret) do
-    secret = Base.decode64!(encoded_secret)
-
-    verify_signature(conn, payload, secret)
+    verify_signature(conn, payload, Base.decode64!(encoded_secret))
   end
 
   def verify(conn, payload, secret) do
@@ -24,45 +22,24 @@ defmodule Webhoox.Authentication.StandardWebhook do
   end
 
   defp verify_signature(conn, payload, secret) do
-    validate_headers(conn)
+    {id, timestamp, header_signatures} = get_req_headers(conn)
 
-    [id] = get_req_header(conn, "webhook-id")
-    [timestamp] = get_req_header(conn, "webhook-timestamp")
-    signatures = get_req_header(conn, "webhook-signature")
-
-    signed_signature =
+    signature =
       sign(id, String.to_integer(timestamp), payload, secret)
       |> split_signature_from_identifier()
 
-    valid_signatures?(signatures, signed_signature)
+    valid_signatures?(header_signatures, signature)
   end
 
-  defp validate_headers(%{req_headers: req_headers}) do
-    required_headers = ["webhook-id", "webhook-timestamp", "webhook-signature"]
-    filtered_headers = filter_headers(req_headers, required_headers)
-
-    unless missing_headers?(filtered_headers, required_headers) do
-      missing_headers = join_missing_headers(filtered_headers, required_headers)
-
-      raise ArgumentError, message: "Missing required headers: #{missing_headers}"
+  defp get_req_headers(conn) do
+    with [id] when is_binary(id) <- get_req_header(conn, "webhook-id"),
+         [timestamp] when is_binary(timestamp) <- get_req_header(conn, "webhook-timestamp"),
+         signatures when is_list(signatures) <- get_req_header(conn, "webhook-signature") do
+      {id, timestamp, signatures}
+    else
+      _ ->
+        raise ArgumentError, message: "Missing required headers"
     end
-  end
-
-  defp filter_headers(req_headers, required_headers) do
-    req_headers
-    |> Enum.map(fn {header, _value} -> header end)
-    |> Enum.filter(&Enum.member?(required_headers, &1))
-  end
-
-  defp missing_headers?(headers, required_headers) do
-    required_headers
-    |> Enum.all?(&Enum.member?(headers, &1))
-  end
-
-  defp join_missing_headers(headers, required_headers) do
-    required_headers
-    |> Enum.reject(&Enum.member?(headers, &1))
-    |> Enum.join(", ")
   end
 
   defp valid_signatures?([], _signature), do: false

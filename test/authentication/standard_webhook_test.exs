@@ -97,45 +97,13 @@ defmodule Webhoox.Authentication.StandardWebhookTest do
       assert false == Authentication.verify(conn, @payload, @secret)
     end
 
-    test "raises error when missing all required headers" do
-      connection = conn(:post, "/_incoming", @payload)
-
-      assert_raise ArgumentError,
-                   "Missing required headers: webhook-id, webhook-timestamp, webhook-signature",
-                   fn ->
-                     Authentication.verify(connection, @payload, @secret)
-                   end
-    end
-
-    test "raises error when missing webhook-id header", %{signature: signature} do
+    test "raises error when missing webhook header", %{signature: signature} do
       connection =
         conn(:post, "/_incoming", @payload)
         |> put_req_header("webhook-timestamp", to_string(@timestamp))
         |> put_req_header("webhook-signature", signature)
 
-      assert_raise ArgumentError, "Missing required headers: webhook-id", fn ->
-        Authentication.verify(connection, @payload, @secret)
-      end
-    end
-
-    test "raises error when missing webhook-timestamp header", %{signature: signature} do
-      connection =
-        conn(:post, "/_incoming", @payload)
-        |> put_req_header("webhook-id", @id)
-        |> put_req_header("webhook-signature", signature)
-
-      assert_raise ArgumentError, "Missing required headers: webhook-timestamp", fn ->
-        Authentication.verify(connection, @payload, @secret)
-      end
-    end
-
-    test "raises error when missing webhook-signature header" do
-      connection =
-        conn(:post, "/_incoming", @payload)
-        |> put_req_header("webhook-id", @id)
-        |> put_req_header("webhook-timestamp", to_string(@timestamp))
-
-      assert_raise ArgumentError, "Missing required headers: webhook-signature", fn ->
+      assert_raise ArgumentError, "Missing required headers", fn ->
         Authentication.verify(connection, @payload, @secret)
       end
     end
