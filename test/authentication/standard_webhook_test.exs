@@ -27,14 +27,14 @@ defmodule Webhoox.Authentication.StandardWebhookTest do
 
     test "raises error when message timestamp is too old" do
       assert_raise ArgumentError, "Message timestamp too old", fn ->
-        timestamp = :os.system_time(:second) - @tolerance - 5000
+        timestamp = :os.system_time(:second) - @tolerance - 1
         Authentication.sign(@id, timestamp, @payload, @secret)
       end
     end
 
     test "raises error when message timestamp is too new" do
       assert_raise ArgumentError, "Message timestamp too new", fn ->
-        timestamp = :os.system_time(:second) + @tolerance + 5000
+        timestamp = :os.system_time(:second) + @tolerance + 1
         Authentication.sign(@id, timestamp, @payload, @secret)
       end
     end
@@ -79,10 +79,22 @@ defmodule Webhoox.Authentication.StandardWebhookTest do
       {:ok, signature: signature}
     end
 
-    test "return true when valid signature", %{signature: signature} do
+    test "return true when valid encoded_secret and signature", %{signature: signature} do
+      conn = setup_webhook(signature)
+
+      assert Authentication.verify(conn, @payload, @encoded_secret)
+    end
+
+    test "return true when valid secret and signature", %{signature: signature} do
       conn = setup_webhook(signature)
 
       assert Authentication.verify(conn, @payload, @secret)
+    end
+
+    test "return false when valid secret and invalid signature" do
+      conn = setup_webhook("invalid signature")
+
+      assert false == Authentication.verify(conn, @payload, @secret)
     end
 
     test "raises error when missing all required headers" do
