@@ -2,8 +2,8 @@ defmodule Webhoox.Adapter.StandardWebhookTest do
   use ExUnit.Case
   use Plug.Test
 
-  alias Webhoox.Authentication.StandardWebhook, as: Authentication
   alias Webhoox.Adapter.StandardWebhook, as: Adapter
+  alias Webhoox.Authentication.StandardWebhook, as: Authentication
   alias Webhoox.Webhook.StandardWebhook, as: StandardWebhook
 
   @id "msg_p5jXN8AQM9LWM0D4loKWxJek"
