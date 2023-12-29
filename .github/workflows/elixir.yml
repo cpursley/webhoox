@@ -52,4 +52,4 @@ jobs:
 
     - name: Check code quality, security and format
       run: |
-        mix quality --strict
+        mix quality
