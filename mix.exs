@@ -10,6 +10,7 @@ defmodule Webhoox.MixProject do
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      aliases: aliases(),
       elixirc_paths: elixirc_paths(Mix.env()),
       name: "Webhoox",
       description: "Handle incoming webhooks via adapters",
@@ -23,7 +24,8 @@ defmodule Webhoox.MixProject do
       docs: [
         main: "readme",
         extras: ["README.md"]
-      ]
+      ],
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -42,7 +44,24 @@ defmodule Webhoox.MixProject do
       {:plug, "~> 1.15.2"},
       {:jason, "~> 1.4", only: [:dev, :test]},
       {:ex_doc, "~> 0.31.0", only: :dev},
-      {:credo, "~> 1.7.2", only: [:dev, :test], runtime: false}
+
+      # Test
+      {:sobelow, "~> 0.12", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7.2", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.10", only: [:dev, :test], runtime: false}
+    ]
+  end
+
+  defp aliases do
+    [
+      # Run tests and check coverage
+      test: ["test", "coveralls"],
+      # Run to check the quality of your code
+      quality: [
+        "format --check-formatted",
+        "sobelow --config",
+        "credo"
+      ]
     ]
   end
 end

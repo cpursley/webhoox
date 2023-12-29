@@ -1,4 +1,5 @@
 defmodule Webhoox.Utility.Response do
+  @moduledoc false
   def unauthorized_request(conn) do
     error_resp = %{
       body: %{message: "Unauthorized", code: "401"},

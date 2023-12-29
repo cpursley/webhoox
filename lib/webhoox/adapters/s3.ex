@@ -19,9 +19,10 @@ defmodule Webhoox.Adapter.S3 do
   end
 
   defp authorized_request?(conn, api_key) do
-    with ["Bearer " <> secret] <- get_req_header(conn, "authorization") do
-      api_key == secret
-    else
+    case get_req_header(conn, "authorization") do
+      ["Bearer " <> secret] ->
+        api_key == secret
+
       _ ->
         false
     end
