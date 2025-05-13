@@ -2,7 +2,8 @@ ExUnit.start()
 
 defmodule TestHelper do
   use ExUnit.Case
-  use Plug.Test
+  import Plug.Conn
+  import Plug.Test
 
   def setup_webhook(params, signature, header) do
     conn(:post, "/_incoming", params)

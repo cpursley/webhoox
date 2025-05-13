@@ -1,6 +1,7 @@
 defmodule Webhoox.Adapter.StandardWebhookTest do
   use ExUnit.Case
-  use Plug.Test
+  import Plug.Conn
+  import Plug.Test
 
   alias Webhoox.Adapter.StandardWebhook, as: Adapter
   alias Webhoox.Authentication.StandardWebhook, as: Authentication

@@ -1,6 +1,7 @@
 defmodule WebhooxTest do
   use ExUnit.Case
-  use Plug.Test
+  import Plug.Conn
+  import Plug.Test
 
   defmodule TestAdapter do
     @behaviour Webhoox.Adapter

@@ -1,6 +1,6 @@
 defmodule Webhoox.Adapter.MailgunTest do
   use ExUnit.Case
-  use Plug.Test
+  import Plug.Test
 
   alias Webhoox.Adapter
 
