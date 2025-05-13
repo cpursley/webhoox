@@ -43,7 +43,7 @@ defmodule Webhoox.MixProject do
     [
       {:plug, "~> 1.15.2"},
       {:jason, "~> 1.4", only: [:dev, :test]},
-      {:ex_doc, "~> 0.31.0", only: :dev},
+      {:ex_doc, "~> 0.38.0", only: :dev},
 
       # Test
       {:sobelow, "~> 0.12", only: [:dev, :test], runtime: false},
