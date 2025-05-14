@@ -1,6 +1,7 @@
 defmodule Webhoox.Adapter.S3Test do
   use ExUnit.Case
-  use Plug.Test
+  import Plug.Conn
+  import Plug.Test
 
   alias Webhoox.Adapter
   alias Webhoox.Webhook.S3
