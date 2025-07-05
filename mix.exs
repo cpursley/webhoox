@@ -1,7 +1,7 @@
 defmodule Webhoox.MixProject do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.3.1"
 
   def project do
     [
@@ -41,13 +41,13 @@ defmodule Webhoox.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug, "~> 1.17.0"},
+      {:plug, "~> 1.18"},
       {:jason, "~> 1.4", only: [:dev, :test]},
-      {:ex_doc, "~> 0.38.0", only: :dev},
+      {:ex_doc, "~>  0.38", only: :dev},
 
       # Test
       {:sobelow, "~> 0.12", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.7.2", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: [:dev, :test], runtime: false}
     ]
   end

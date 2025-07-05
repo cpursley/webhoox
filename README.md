@@ -26,7 +26,7 @@ by adding `webhoox` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:webhoox, "~> 0.3.0"}
+    {:webhoox, "~> 0.3.1"}
   ]
 end
 ```
